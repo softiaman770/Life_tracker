@@ -212,7 +212,9 @@ async def create_progress_entry(entry: ProgressEntryCreate):
         return ProgressEntry(**parse_from_mongo(updated_entry))
     else:
         progress_obj = ProgressEntry(**entry_dict)
-        await db.progress_entries.insert_one(progress_obj.dict())
+        # Convert to MongoDB-compatible format
+        mongo_dict = model_to_mongo_dict(progress_obj)
+        await db.progress_entries.insert_one(mongo_dict)
         return progress_obj
 
 @api_router.get("/progress-entries/{task_id}")
