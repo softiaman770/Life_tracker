@@ -1,8 +1,8 @@
 {
   "summary": {
     "tests_run": 15,
-    "tests_passed": 13,
-    "success_rate": 86.66666666666667
+    "tests_passed": 14,
+    "success_rate": 93.33333333333333
   },
   "detailed_results": [
     {
@@ -24,9 +24,9 @@
       "actual_status": 200,
       "success": true,
       "response_data": {
-        "total_journal_entries": 0,
+        "total_journal_entries": 1,
         "total_life_tasks": 0,
-        "has_today_journal": false,
+        "has_today_journal": true,
         "today_progress_count": 0
       }
     },
@@ -35,7 +35,7 @@
       "method": "POST",
       "endpoint": "journal-entries",
       "expected_status": 201,
-      "actual_status": 500,
+      "actual_status": 400,
       "success": false,
       "response_data": {}
     },
@@ -47,12 +47,12 @@
       "actual_status": 200,
       "success": true,
       "response_data": {
-        "id": "88d1d4ce-9e48-43c6-beda-3766038c1a9b",
+        "id": "3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
         "name": "Test Exercise Task",
         "description": "Daily exercise routine",
         "category": "Health",
         "target_value": 60,
-        "created_at": "2025-10-01T21:27:46.571850Z"
+        "created_at": "2025-10-01T21:29:08.828159Z"
       }
     },
     {
@@ -64,29 +64,29 @@
       "success": true,
       "response_data": [
         {
-          "id": "88d1d4ce-9e48-43c6-beda-3766038c1a9b",
+          "id": "3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
           "name": "Test Exercise Task",
           "description": "Daily exercise routine",
           "category": "Health",
           "target_value": 60,
-          "created_at": "2025-10-01T21:27:46.571000"
+          "created_at": "2025-10-01T21:29:08.828000"
         }
       ]
     },
     {
       "name": "Update Life Task",
       "method": "PUT",
-      "endpoint": "life-tasks/88d1d4ce-9e48-43c6-beda-3766038c1a9b",
+      "endpoint": "life-tasks/3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
       "expected_status": 200,
       "actual_status": 200,
       "success": true,
       "response_data": {
-        "id": "88d1d4ce-9e48-43c6-beda-3766038c1a9b",
+        "id": "3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
         "name": "Updated Exercise Task",
         "description": "Updated daily exercise routine",
         "category": "Health",
         "target_value": 90,
-        "created_at": "2025-10-01T21:27:46.571000"
+        "created_at": "2025-10-01T21:29:08.828000"
       }
     },
     {
@@ -94,32 +94,57 @@
       "method": "POST",
       "endpoint": "progress-entries",
       "expected_status": 200,
-      "actual_status": 500,
-      "success": false,
-      "response_data": {}
+      "actual_status": 200,
+      "success": true,
+      "response_data": {
+        "id": "d1430547-5831-4179-9307-1cc991910ca6",
+        "task_id": "3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
+        "date": "2025-10-01",
+        "progress_value": 45,
+        "notes": "Good progress today",
+        "created_at": "2025-10-01T21:29:08.946855Z"
+      }
     },
     {
       "name": "Get Progress Entries",
       "method": "GET",
-      "endpoint": "progress-entries/88d1d4ce-9e48-43c6-beda-3766038c1a9b",
+      "endpoint": "progress-entries/3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
       "expected_status": 200,
       "actual_status": 200,
       "success": true,
-      "response_data": []
+      "response_data": [
+        {
+          "id": "d1430547-5831-4179-9307-1cc991910ca6",
+          "task_id": "3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
+          "date": "2025-10-01",
+          "progress_value": 45,
+          "notes": "Good progress today",
+          "created_at": "2025-10-01T21:29:08.946855Z"
+        }
+      ]
     },
     {
       "name": "Get Weekly Progress",
       "method": "GET",
-      "endpoint": "progress-entries/week/88d1d4ce-9e48-43c6-beda-3766038c1a9b",
+      "endpoint": "progress-entries/week/3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
       "expected_status": 200,
       "actual_status": 200,
       "success": true,
-      "response_data": []
+      "response_data": [
+        {
+          "id": "d1430547-5831-4179-9307-1cc991910ca6",
+          "task_id": "3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
+          "date": "2025-10-01",
+          "progress_value": 45,
+          "notes": "Good progress today",
+          "created_at": "2025-10-01T21:29:08.946855Z"
+        }
+      ]
     },
     {
       "name": "Delete Life Task",
       "method": "DELETE",
-      "endpoint": "life-tasks/88d1d4ce-9e48-43c6-beda-3766038c1a9b",
+      "endpoint": "life-tasks/3efd719c-69b7-4faa-b678-1fc7b1d6b9a0",
       "expected_status": 200,
       "actual_status": 200,
       "success": true,
