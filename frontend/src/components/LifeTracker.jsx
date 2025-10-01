@@ -356,7 +356,13 @@ const LifeTracker = () => {
             </Card>
           </div>
         )}
-      </div>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="weekly">
+          <WeeklyProgress />
+        </TabsContent>
+      </Tabs>
 
       {/* Edit Task Dialog */}
       <Dialog open={selectedTask !== null} onOpenChange={() => setSelectedTask(null)}>
