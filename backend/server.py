@@ -26,17 +26,26 @@ api_router = APIRouter(prefix="/api")
 
 # Helper functions for MongoDB date serialization
 def prepare_for_mongo(data):
-    if isinstance(data.get('date'), date):
-        data['date'] = data['date'].isoformat()
+    """Convert date objects to ISO format strings for MongoDB storage"""
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if isinstance(value, date):
+                data[key] = value.isoformat()
     return data
 
 def parse_from_mongo(item):
+    """Convert ISO format strings back to date objects"""
     if isinstance(item.get('date'), str):
         try:
             item['date'] = datetime.fromisoformat(item['date']).date()
         except:
             pass
     return item
+
+def model_to_mongo_dict(model_instance):
+    """Convert Pydantic model to MongoDB-compatible dict"""
+    data = model_instance.dict()
+    return prepare_for_mongo(data)
 
 # Define Models
 class JournalEntry(BaseModel):
