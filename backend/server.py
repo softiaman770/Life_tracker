@@ -108,7 +108,9 @@ async def create_journal_entry(entry: JournalEntryCreate):
     if existing:
         raise HTTPException(status_code=400, detail="Journal entry already exists for this date")
     
-    await db.journal_entries.insert_one(journal_obj.dict())
+    # Convert to MongoDB-compatible format
+    mongo_dict = model_to_mongo_dict(journal_obj)
+    await db.journal_entries.insert_one(mongo_dict)
     return journal_obj
 
 @api_router.get("/journal-entries", response_model=List[JournalEntry])
