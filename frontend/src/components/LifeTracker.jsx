@@ -258,8 +258,22 @@ const LifeTracker = () => {
         </Dialog>
       </div>
 
-      {/* Tasks Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Tabs for Tasks and Progress */}
+      <Tabs defaultValue="tasks" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="tasks" data-testid="tasks-tab">
+            <Target className="w-4 h-4 mr-2" />
+            Tasks & Progress
+          </TabsTrigger>
+          <TabsTrigger value="weekly" data-testid="weekly-progress-tab">
+            <TrendingUp className="w-4 h-4 mr-2" />
+            Weekly Charts
+          </TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="tasks">
+          {/* Tasks Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tasks.map((task) => {
           const progress = todayProgress[task.id] || 0;
           const progressPercentage = (progress / task.target_value) * 100;
